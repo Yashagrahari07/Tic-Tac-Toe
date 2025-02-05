@@ -18,11 +18,15 @@ const useTicTacToe = () => {
   ];
 
   const calculateWinner = (currentBoard) => {
-    for( let i = 0; i < Winning_Patterns.length; i++){
-        const [a, b, c] = Winning_Patterns[i];
-        if(currentBoard[a] && currentBoard[a] === currentBoard[b] && currentBoard[a]===currentBoard[c]){
-            return currentBoard[a];
-        }
+    for (let i = 0; i < Winning_Patterns.length; i++) {
+      const [a, b, c] = Winning_Patterns[i];
+      if (
+        currentBoard[a] &&
+        currentBoard[a] === currentBoard[b] &&
+        currentBoard[a] === currentBoard[c]
+      ) {
+        return currentBoard[a];
+      }
     }
     return null;
   };
@@ -39,12 +43,15 @@ const useTicTacToe = () => {
 
   const getStatusMessage = () => {
     const winner = calculateWinner(board);
-    if(winner) return `Player ${winner} wins!`;
-    if(!board.includes(null)) return `It's a draw!`;
+    if (winner) return `Player ${winner} wins!`;
+    if (!board.includes(null)) return `It's a draw!`;
     return `Player ${isXNext ? "X" : "O"} turn`;
   };
 
-  const resetGame = () => {};
+  const resetGame = () => {
+    setBoard(initialBoard());
+    setIsXNext(true);
+  };
 
   return { board, handleClick, calculateWinner, getStatusMessage, resetGame };
 };
